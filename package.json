@@ -4,11 +4,22 @@
   "description": "An application for users to create and share wikis",
   "main": "index.js",
   "scripts": {
-    "test": "export NODE_ENV=test&& jasmine"
+    "test": "set NODE_ENV=test&& jasmine",
+    "start": "node src/server.js"
   },
   "keywords": [
     "blocipedia"
   ],
   "author": "Tim Weiss",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^3.0.0",
+    "request": "^2.83.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^5.0.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
 }
