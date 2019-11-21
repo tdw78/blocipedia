@@ -18,7 +18,7 @@ describe("routes : users", () => {
   });
 
   describe("GET /users/sign_up", () => {
-    it("should render a view with a sign up form", done => {
+    it("should render a view with a sign up form", (done) => {
       request.get(`${base}sign_up`, (err, res, body) => {
         expect(err).toBeNull();
         expect(body).toContain("Sign Up");
@@ -28,7 +28,7 @@ describe("routes : users", () => {
   });
 
   describe("POST /users", () => {
-    it("should create a new user with valid values and redirect", done => {
+    it("should create a new user with valid values and redirect", (done) => {
       const options = {
         url: `${base}`,
         form: {
@@ -54,7 +54,7 @@ describe("routes : users", () => {
       });
     });
 
-    it("should create hashed password", done => {
+    it("should create hashed password", (done) => {
       const options = {
         url: `${base}`,
         form: {
@@ -66,14 +66,14 @@ describe("routes : users", () => {
 
       request.post(options, (err, res, body) => {
         User.findOne({ where: { name: "vanillaboi" } })
-          .then(user => {
+          .then((user) => {
             expect(user).not.toBeNull();
             expect(user.email).toBe("vanilla@gmail.com");
             expect(user.id).toBe(1);
             expect(user.password).not.toBe("123456789");
             done();
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
             done();
           });
@@ -83,7 +83,7 @@ describe("routes : users", () => {
     it("should not create a new user with invalid attributes and redirect", done => {
       request.post(
         {
-          url: `${base}sign_up`,
+          url: `${base}`,
           form: {
             name: "vanillaboi",
             email: "no",
@@ -96,7 +96,7 @@ describe("routes : users", () => {
               expect(user).toBeNull();
               done();
             })
-            .catch(err => {
+            .catch((err) => {
               console.log(err);
               done();
             });
@@ -105,13 +105,15 @@ describe("routes : users", () => {
     });
   });
 
-  // describe("GET /users/sign_in", () => {
-  //   it("should render a view with a sign in form", done => {
-  //     request.get(`${base}sign_in`, (err, res, body) => {
-  //       expect(err).toBeNull();
-  //       expect(body).toContain("Sign in");
-  //       done();
-  //     });
-  //   });
-  // });
+    describe("GET /users/sign_in", () => {
+
+      it('should render the sign in form', (done) => {
+         request.get(`${base}sign_in`, (err, res, body) => {
+          expect(err).toBe(null);
+          expect(res.body).toContain("Sign In");
+          done();
+    });
+  });
+ });
+
 });
