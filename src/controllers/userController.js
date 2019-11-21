@@ -12,6 +12,7 @@ signup(req, res, next){
  },
  create(req, res, next){
        let newUser = {
+         name: req.body.name,
          email: req.body.email,
          password: req.body.password,
          passwordConfirmation: req.body.passwordConfirmation
@@ -20,15 +21,17 @@ signup(req, res, next){
        userQueries.createUser(newUser, (err, user) => {
          if(err){
            req.flash("error", err);
-           res.redirect("/users/sign_up");
+           console.log(err);
+           res.redirect("/");
+
          } else {
   
            passport.authenticate("local")(req, res, () => {
-             req.flash("notice", "You've successfully signed in!");
+             req.flash("notice", "You've successfully signed up!");
              res.redirect("/");
            });
            const msg = {
-            to: 'test@example.com',
+            to: newUser.email,
             from: 'test@example.com',
             subject: 'Sending with Twilio SendGrid is Fun',
             text: 'and easy to do anywhere, even with Node.js',

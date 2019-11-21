@@ -4,16 +4,14 @@
     "password": null,
     "database": "blocipedia",
     "host": "127.0.0.1",
-    "dialect": "postgres",
-    "operatorsAliases": false
+    "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
     "password": null,
     "database": "blocipedia-test",
     "host": "127.0.0.1",
-    "dialect": "postgres",
-    "operatorsAliases": false
+    "dialect": "postgres"
   },
   "production": {
     "username": "root",
@@ -22,7 +20,6 @@
     "host": "127.0.0.1",
     "dialect": "postgres",
     "use_env_variable": "DATABASE_URL",
-    "operatorsAliases": false,
     "db": "process.env.DATABASE_URL"
   }
 }

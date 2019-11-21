@@ -27,19 +27,20 @@ describe("routes : users", () => {
     });
   });
 
-  describe("POST /users/sign_up", () => {
+  describe("POST /users", () => {
     it("should create a new user with valid values and redirect", done => {
       const options = {
-        url: `${base}sign_up`,
+        url: `${base}`,
         form: {
-          username: "vanillaboi",
+          name: "vanillaboi",
           email: "vanilla@gmail.com",
           password: "123456789"
         }
       };
 
       request.post(options, (err, res, body) => {
-        User.findOne({ where: { username: "vanillaboi" } })
+
+        User.findOne({ where: { name: "vanillaboi" } })
           .then(user => {
             expect(user).not.toBeNull();
             expect(user.email).toBe("vanilla@gmail.com");
@@ -55,16 +56,16 @@ describe("routes : users", () => {
 
     it("should create hashed password", done => {
       const options = {
-        url: `${base}sign_up`,
+        url: `${base}`,
         form: {
-          username: "vanillaboi",
+          name: "vanillaboi",
           email: "vanilla@gmail.com",
           password: "123456789"
         }
       };
 
       request.post(options, (err, res, body) => {
-        User.findOne({ where: { username: "vanillaboi" } })
+        User.findOne({ where: { name: "vanillaboi" } })
           .then(user => {
             expect(user).not.toBeNull();
             expect(user.email).toBe("vanilla@gmail.com");
@@ -84,7 +85,7 @@ describe("routes : users", () => {
         {
           url: `${base}sign_up`,
           form: {
-            username: "vanillaboi",
+            name: "vanillaboi",
             email: "no",
             password: "123456789"
           }
