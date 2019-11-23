@@ -17,7 +17,6 @@ signup(req, res, next){
          password: req.body.password,
          passwordConfirmation: req.body.passwordConfirmation
        };
-  
        userQueries.createUser(newUser, (err, user) => {
          if(err){
            req.flash("error", err);
