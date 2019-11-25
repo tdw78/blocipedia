@@ -13,7 +13,7 @@ module.exports = {
 
     if (errors) {
       req.flash("error", errors);
-      return res.redirect(req.headers.referer);
+      res.redirect(req.headers.referer);
     } else {
       return next();
     }
@@ -30,7 +30,7 @@ module.exports = {
 
     if (errors) {
       req.flash("error", errors);
-      return res.redirect(req.headers.referer);
+      res.redirect(req.headers.referer);
     } else {
       return next();
     }

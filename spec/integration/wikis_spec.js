@@ -34,7 +34,7 @@ describe("routes : wikis", () => {
           Wiki.create({
             title: "Golf",
             body: "Fundamentals of Golf",
-            userId: user.id
+            userId: this.user.id
           })
             .then((wiki) => {
               this.wiki = wiki;
