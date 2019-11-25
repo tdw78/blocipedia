@@ -80,7 +80,7 @@ describe("routes : users", () => {
       });
     });
 
-    it("should not create a new user with invalid attributes and redirect", done => {
+    it("should not create a new user with invalid attributes and redirect", (done) => {
       request.post(
         {
           url: `${base}`,
@@ -92,7 +92,7 @@ describe("routes : users", () => {
         },
         (err, res, body) => {
           User.findOne({ where: { email: "no" } })
-            .then(user => {
+            .then((user) => {
               expect(user).toBeNull();
               done();
             })

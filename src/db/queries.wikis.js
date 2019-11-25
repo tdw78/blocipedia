@@ -6,10 +6,10 @@ module.exports = {
      return Wiki.findAll()
      
      .then((wikis) => {
-        callback(null, wikis)
+        callback(null, wikis);
      })
      .catch((err) => {
-       callback(err)
+       callback(err);
      })
   },
   addWiki(newWiki, callback){

@@ -15,18 +15,22 @@ describe("routes : wikis", () => {
       User.create({
         name: "Harpo West",
         email: "harpowest@email.com",
-        password: "123abc"
+        password: "123abc",
+        role: "standard"
       })
         .then((user) => {
           this.user = user;
-          request.get({
-            url: "http://localhost:5000/auth/fake",
-            form: {
-              id: user.id,
-              name: user.name,
-              email: user.email
-            }
-          });
+
+          // request.get({
+          //   url: "http://localhost:5000/auth/fake",
+          //   form: {
+          //     id: user.id,
+          //     name: user.name,
+          //     email: user.email,
+          //     password: user.password,
+          //     role: user.role
+          //   }
+          // });
           Wiki.create({
             title: "Golf",
             body: "Fundamentals of Golf",
