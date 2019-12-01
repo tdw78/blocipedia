@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+     <% include ../static/partials/navbar.ejs %>
+     <main>
+       <h2>Downgrade Your Account</h2>
+       <form method="POST" action="/users/<%=currentUser.id%>/downgrade">
+         <p>Please click to confirm that you would like to downgrade your account</p>
+         <button type="submit" class="btn btn-primary btn-lg">Confirm Downgrade</button>
+  
+       </form>
+     </main>
+     <% include ../static/partials/baseScripts.ejs %>
+  </body>
+</html>
