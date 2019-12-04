@@ -8,15 +8,21 @@
 
     <main class="container">
       <% include ../static/partials/messages.ejs %>
-      <header class="jumbotron my-3">
-        <h1 class="display-5">Upgrade to Premium membership.</h1>
-        <p class="lead">No contract. Cancel anytime.</p>
-        <ul>
-          <li>Create private wikis.</li>
-          <li>Increase engagement.</li>
-          <li>Collaborate with other premium members.</li>
-        </ul>
+      
+      <header class="jumbotron my-4">
+        <h1 class="display-3">Benefits of a Premium Membership</h1>
       </header>
+      <section class="row text-center">
+        <section class="col-lg-4">
+          <h4 class="card-title">Create Private Wikis</h4>
+          <p class="card-text">Keep your wikis private from the public</p>
+        </section>
+        <section class="col-lg-4">
+          <h4 class="card-title">Low Cost</h4>
+          <p class="card-text">The price is only $15.00</p>
+        </section>
+      </section>
+      <br>
 
       <form method="POST" action="/users/<%=currentUser.id%>/upgrade">
         <script
@@ -24,11 +30,9 @@
           class="stripe-button"
           data-key="pk_test_KVZPgPVk5RktivezgVcjqNk300Dpxti3HN"
           data-amount="1500"
-          data-name="Stripe.com"
-          data-description="Example charge"
+          data-name="Upgrade to Premium"
           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
           data-locale="auto"
-          data-zip-code="true"
         ></script>
       </form>
     </main>

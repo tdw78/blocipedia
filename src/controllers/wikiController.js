@@ -1,5 +1,5 @@
 const wikiQueries = require("../db/queries.wikis.js")
-//const Authorizer = require("../policies/wiki");
+const Authorizer = require("../policies/wiki");
 
 module.exports = {
 
@@ -67,6 +67,9 @@ edit(req, res, next){
            res.redirect(303, "/wikis");
          }
      });
+ },
+ newPrivate(req, res, next){
+   res.render("wikis/newPrivate");
  }
 
 }
