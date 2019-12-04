@@ -2,23 +2,24 @@
 const faker = require("faker");
 
 let users = [
-  {
-    name: "Joey Shmos",
-    email: "jshmos@email.com",
-    password: "abcdef",
-    role: "standard",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    name: "Johnny Does",
-    email: "jdoes@email.com",
-    password: "123456",
-    role: "standard",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  }
-];
+    {
+      name: "Joe Shmos",
+      email: "shmos@email.com",
+      password: "abcdef",
+      role: "standard",
+      createdAt: new Date(),
+      updatedAt: new Date()
+   },
+   {
+      name: "John Does",
+      email: "does@email.com",
+      password: "123456",
+      role: "standard",
+      createdAt: new Date(),
+      updatedAt: new Date()
+   }
+ ];
+
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
