@@ -116,4 +116,57 @@ describe("routes : users", () => {
   });
  });
 
+ describe("POST /users/:id/upgrade", () => {
+  it("should update a users role to Premium", (done) => {
+    const options = {
+      url: `${base}user.id/upgrade`,
+      form: {
+        name: "Mike Smith",
+        email: "vanilla@gmail.com",
+        password: "123456789",
+        role: "standard"
+      }
+    };
+
+    request.post(options, (err, res, body) => {
+
+      User.findOne({ where: { name: "Mike Smith" } })
+        .then((user) => {
+          expect(user.role).toBe("Premium");
+          done();
+        })
+        .catch(err => {
+          console.log(err);
+          done();
+        });
+    });
+  });
+});
+describe("POST /users/:id/downgrade", () => {
+  it("should update a users role to Standard", (done) => {
+    const options = {
+      url: `${base}user.id/downgrade`,
+      form: {
+        name: "Mike Smith",
+        email: "vanilla@gmail.com",
+        password: "123456789",
+        role: "Premium"
+      }
+    };
+
+    request.post(options, (err, res, body) => {
+
+      User.findOne({ where: { name: "Mike Smith" } })
+        .then((user) => {
+          expect(user.role).toBe("Standard");
+          done();
+        })
+        .catch(err => {
+          console.log(err);
+          done();
+        });
+    });
+  });
+});
+
 });
