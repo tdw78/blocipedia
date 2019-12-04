@@ -8,9 +8,15 @@
       <% include ../static/partials/navbar.ejs %>
 
       <h1>Wikis</h1>
+
+      <% if(currentUser && currentUser.role === "Premium") { %>
+        <a href="/wikis/new/private" class="btn btn-success">Create a Private Wiki</a>
+      <% } %>
+
       <% if(currentUser) { %>
         <a href="/wikis/new" class="btn btn-success">Create a New Wiki</a>
-        <% } %>
+      <% } %>
+      
       <ul class="list-group">
         <% wikis.forEach((Wiki) => { %>
 
@@ -19,7 +25,6 @@
           </li>
         <% }) %>
       </ul>
-
     </main>
   </body>
 </html>

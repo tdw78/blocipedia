@@ -19,7 +19,6 @@ module.exports = {
        userId: newWiki.userId
      })
      .then((wiki) => {
-       console.log("&&&&&&#########################", wiki.userId);
        callback(null, wiki);
      })
      .catch((err) => {

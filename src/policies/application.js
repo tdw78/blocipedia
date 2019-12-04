@@ -1,20 +1,12 @@
 module.exports = class ApplicationPolicy {
-  
+
   constructor(user, record) {
     this.user = user;
     this.record = record;
   }
-  
-  _hasUser() {
-    return this.user != null;
-  }
-
-  _isStandard() {
-    return this.user && this.user.role == "standard";
-  }
 
   _isOwner() {
-    return this.record && this.record.userId == this.user.id;
+    return this.record && (this.record.userId == this.user.id);
   }
 
   _isAdmin() {
@@ -22,7 +14,11 @@ module.exports = class ApplicationPolicy {
   }
 
   _isPremium() {
-    return this.user && this.user.role == "premium";
+    return this.user && this.user.role == "Premium";
+  }
+
+  _isStandard() {
+    return this.user && this.user.role == "Standard";
   }
 
   new() {
@@ -38,19 +34,7 @@ module.exports = class ApplicationPolicy {
   }
 
   edit() {
-    if (this.record.private == false) {
-      return (
-        this.new() &&
-        this.record &&
-        (this._isStandard() || this._isAdmin() || this._isPremium())
-      );
-    } else if (this.record.private == true) {
-      return (
-        this.new() &&
-        this.record &&
-        (this._isStandard() || this._isAdmin() || this._isPremium())
-      );
-    }
+    return this.new();
   }
 
   update() {
@@ -58,6 +42,7 @@ module.exports = class ApplicationPolicy {
   }
 
   destroy() {
-    return this.update();
+    return this.update() &&
+      this.record && (this._isOwner() || this._isAdmin() || this._isPremium());
   }
-};
+}

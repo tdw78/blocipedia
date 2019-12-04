@@ -1,3 +1,10 @@
+// if(process.env.NODE_ENV !== "production") {
+//   require('dotenv').load()
+// }
+
+// const publicKey = process.env.Stripe_Public_Key
+// const secretKey = process.env.Stripe_Secret_Key
+
 const app = require("./app");
 const http = require("http");
 const port = normalizePort(process.env.PORT || "5000");

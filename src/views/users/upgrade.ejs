@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+      <% include ../static/partials/messages.ejs %>
+      
+      <header class="jumbotron my-4">
+        <h1 class="display-3">Benefits of a Premium Membership</h1>
+      </header>
+      <section class="row text-center">
+        <section class="col-lg-4">
+          <h4 class="card-title">Create Private Wikis</h4>
+          <p class="card-text">Keep your wikis private from the public</p>
+        </section>
+        <section class="col-lg-4">
+          <h4 class="card-title">Low Cost</h4>
+          <p class="card-text">The price is only $15.00</p>
+        </section>
+      </section>
+      <br>
+
+      <form method="POST" action="/users/<%=currentUser.id%>/upgrade">
+        <script
+          src="https://checkout.stripe.com/checkout.js"
+          class="stripe-button"
+          data-key="pk_test_KVZPgPVk5RktivezgVcjqNk300Dpxti3HN"
+          data-amount="1500"
+          data-name="Upgrade to Premium"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-locale="auto"
+        ></script>
+      </form>
+    </main>
+    <% include ../static/partials/baseScripts.ejs %>
+  </body>
+</html>

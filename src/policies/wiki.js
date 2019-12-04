@@ -3,28 +3,27 @@ const ApplicationPolicy = require("./application");
 module.exports = class WikiPolicy extends ApplicationPolicy {
 
   new() {
-    return this._isStandard() || this._isPremium();
+    return this.user != null;
   }
 
   create() {
     return this.new();
   }
 
+  show() {
+    return true;
+  }
+
   edit() {
-    if (this.record.private == false) {
-      return this._hasUser();
-    } else if (this.record.private == true) {
-      return (
-        this.new() && this.record && (this._isAdmin() || this._isPremium())
-      );
-    }
+    return this.new();
   }
 
   update() {
     return this.edit();
   }
-  
+
   destroy() {
-    return this.update();
+    return this.update() &&
+      this.record && (this._isOwner() || this._isAdmin() || this._isPremium());
   }
-};
+}

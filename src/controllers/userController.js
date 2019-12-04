@@ -59,5 +59,45 @@ signup(req, res, next){
        req.logout();
        req.flash("notice", "You have signed out");
        res.redirect("/");
-    }
+    },
+    show(req, res, next){
+
+      userQueries.getUser(req.params.id, (err, result) => {
+        
+       if(err || result.user === undefined){
+          req.flash("notice", "No user found with that ID.");
+         res.redirect("/");
+        } else {
+          res.render("users/show", {...result});
+       }
+     });
+   },
+   upgradePage(req, res, next){
+      res.render("users/upgrade");
+   },
+   upgraded(req, res, next) {
+    userQueries.upgrade(req.params.id, (err, user) => {
+      if (err) {
+        req.flash("error", err);
+        res.redirect("/users/:id/upgrade");
+      } else {
+        req.flash("notice", "You've succesfully updated your account");
+        res.redirect("/users/:id");
+      }
+    });
+  },
+  downgrade(req, res, next){
+    res.render("users/downgrade");
+  },
+  downgraded(req, res, next){
+    userQueries.downgrade(req.params.id, (err, user) => {
+      if(err) {
+        req.flash("error", err);
+        res.redirect("/users/:id/downgrade");
+      } else {
+        req.flash("notice", "You have downgraded your account");
+        res.redirect("/users/:id");
+      }
+    });  
+  }
 }
