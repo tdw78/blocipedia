@@ -61,15 +61,8 @@ edit(req, res, next){
     if(err || wiki == null){
          res.redirect(404, "/");
       } else {
-        const authorized = new Authorizer(req.user, topic).edit();
-
-        if(authorized) {
-          res.render("wikis/edit", {wiki});
-     } else {
-      req.flash("You are not authorized to do that.")
-      res.redirect(`/topics/${req.params.id}`)
-     }
-    }
+         res.render("wikis/edit", {wiki});
+     } 
   });
  },
  update(req, res, next){
