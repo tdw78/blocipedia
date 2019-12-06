@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      allowNull: false
     },
     private: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
     userId: {
       type: DataTypes.INTEGER,
@@ -22,6 +23,14 @@ module.exports = (sequelize, DataTypes) => {
          foreignKey: "userId",
          onDelete: "CASCADE"
     });
+    Wiki.addScope("privateWikis", (userId) => {
+      return {
+        where: { userId: userId, private: true},
+        limit: 10,
+        order: [["createdAt", "DESC"]]
+      };
+    });
   };
+  
   return Wiki;
 };

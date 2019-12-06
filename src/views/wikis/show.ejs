@@ -9,6 +9,10 @@
     <main class="container">
       
       <h1><%= wiki.title %></h1>
+      <% if(wiki.private) { %>
+        <p>- This wiki is private. </p>
+      <% } %>
+
       <% if(currentUser) { %> 
       
       <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit Wiki</a>     
@@ -18,6 +22,14 @@
   
       <% } %>
       
+      <% if(currentUser && currentUser.role === "Premium" && !wiki.private ) { %>
+        <a href="/wikis/<%= wiki.id %>/convert" class="btn btn-danger">Make Private</a>
+      <% } %>
+
+      <% if(currentUser && currentUser.role === "Premium" && wiki.private ) { %>
+        <a href="/wikis/<%= wiki.id %>/convert" class="btn btn-danger">Make Public</a>
+      <% } %>
+       
       <p><%= wiki.body %></p>
 
     </main>

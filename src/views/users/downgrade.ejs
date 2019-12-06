@@ -8,8 +8,9 @@
      <main>
        <h2>Downgrade Your Account</h2>
        <form method="POST" action="/users/<%=currentUser.id%>/downgrade">
-         <p>Please click to confirm that you would like to downgrade your account</p>
-         <button type="submit" class="btn btn-primary btn-lg">Confirm Downgrade</button>
+        
+         <p>Please click to confirm that you would like to downgrade your account</p>   
+         <button type="submit" class="btn btn-primary btn-lg" onclick="alert('REMINDER:  When you downgrade your account, ALL of your private wikis will become public')">Confirm Downgrade</button>
   
        </form>
      </main>

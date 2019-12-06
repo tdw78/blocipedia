@@ -1,4 +1,5 @@
 const userQueries = require("../db/queries.users.js");
+const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const sgMail = require('@sendgrid/mail');
 const flash = require("express-flash");
@@ -82,7 +83,7 @@ signup(req, res, next){
         res.redirect("/users/:id/upgrade");
       } else {
         req.flash("notice", "You've succesfully updated your account");
-        res.redirect("/users/:id");
+        res.redirect("/");
       }
     });
   },
@@ -90,13 +91,14 @@ signup(req, res, next){
     res.render("users/downgrade");
   },
   downgraded(req, res, next){
+    wikiQueries.privateToPublic(req.params.id);
     userQueries.downgrade(req.params.id, (err, user) => {
       if(err) {
         req.flash("error", err);
-        res.redirect("/users/:id/downgrade");
+        res.redirect("/users/downgrade");
       } else {
         req.flash("notice", "You have downgraded your account");
-        res.redirect("/users/:id");
+        res.redirect("/");
       }
     });  
   }

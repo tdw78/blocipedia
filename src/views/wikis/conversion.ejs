@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+     <% include ../static/partials/navbar.ejs %>
+     <main>
+
+       <h2>Convert this Wiki</h2>
+       <p>Please click to confirm that you would like to convert this Wiki.</p>
+       
+       <form action="/wikis/<%= wiki.id %>/convert" method="post">
+         <button type="submit" class="btn btn-primary btn-lg">Confirm Conversion</button>
+       </form>
+
+     </main>
+     <% include ../static/partials/baseScripts.ejs %>
+  </body>
+</html>

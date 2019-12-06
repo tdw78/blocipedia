@@ -5,6 +5,7 @@ let wikis = [
   {
     title: faker.hacker.noun(),
     body: faker.hacker.phrase(),
+    private: false,
     createdAt: new Date(),
     updatedAt: new Date(),
     userId: 1
@@ -12,6 +13,7 @@ let wikis = [
   {
     title: faker.hacker.noun(),
     body: faker.hacker.phrase(),
+    private: false,
     createdAt: new Date(),
     updatedAt: new Date(),
     userId: 2
@@ -19,6 +21,7 @@ let wikis = [
   {
     title: faker.hacker.noun(),
     body: faker.hacker.phrase(),
+    private: false,
     createdAt: new Date(),
     updatedAt: new Date(),
     userId: 3
@@ -26,6 +29,7 @@ let wikis = [
   {
     title: faker.hacker.noun(),
     body: faker.hacker.phrase(),
+    private: false,
     createdAt: new Date(),
     updatedAt: new Date(),
     userId: 4

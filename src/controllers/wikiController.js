@@ -85,6 +85,58 @@ edit(req, res, next){
  },
  newPrivate(req, res, next){
    res.render("wikis/newPrivate");
+ },
+ privateWikis(req, res, next){
+  wikiQueries.getAllWikis((err, wikis) => {
+    if(err) {
+      res.redirect(500, "static/index");
+    } else {
+     res.render("wikis/privatePage", {wikis});
+    }
+  })
+},
+createPrivate(req, res, next){
+  const authorized = new Authorizer(req.user).create();
+
+  if(authorized) {
+    let newWiki = {
+      title: req.body.title,
+      body: req.body.body,
+      userId: req.user.id,
+      private: true
+   };
+
+  wikiQueries.addPrivateWiki(newWiki, (err, wiki) => {
+      if(err) {
+        res.redirect(500, "wikis/new");
+      } else {
+        res.redirect(303, `/wikis/${wiki.id}`);
+      }
+  });
+ } else {
+   req.flash("notice", "You are not authorized to do that.");
+   res.redirect("/wikis");
  }
+},
+conversionPage(req, res, next){
+  wikiQueries.getWiki(req.params.id, (err, wiki) => {
+    
+     if(err || wiki == null){
+      res.redirect(404, "/");
+    } else {
+      res.render("wikis/conversion", {wiki});
+   }
+ });
+},
+convertWiki(req, res, next) {
+  wikiQueries.convertedWiki(req.params.id, (err, wiki) => {
+    if(err) {
+      res.redirect(500, "wikis/new");
+    } else {
+      res.redirect(303, `/wikis/${wiki.id}`);
+    }
+  });
+}
+
 
 }

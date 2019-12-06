@@ -11,5 +11,24 @@
     <br>
     <br>
     <a href="/users/<%= user.id %>/downgrade" class="btn btn-danger">Downgrade Account</a>
+    
+   <hr>
+
+    <h2>My Private Wikis</h2>
+   
+    <ul class="list-unstyled">
+
+       <% if(wikis) { %>
+         <% wikis.forEach((wiki) => { %>
+      
+         <li>
+            <a href="/wikis/<%= wiki.id %>">
+              <%= wiki.title %>
+            </a>
+         </li>
+             <% }) %>
+             <% } %>
+     </ul>
+
   </body>
 </html>
