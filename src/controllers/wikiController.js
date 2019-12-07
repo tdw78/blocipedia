@@ -1,5 +1,6 @@
 const wikiQueries = require("../db/queries.wikis.js")
 const Authorizer = require("../policies/wiki");
+const markdown = require( "markdown" ).markdown;
 
 module.exports = {
 
@@ -28,8 +29,8 @@ index(req, res, next) {
 
    if(authorized) {
      let newWiki = {
-       title: req.body.title,
-       body: req.body.body,
+       title: markdown.toHTML(req.body.title),
+       body: markdown.toHTML(req.body.body),
        userId: req.user.id
     };
 
@@ -100,10 +101,9 @@ createPrivate(req, res, next){
 
   if(authorized) {
     let newWiki = {
-      title: req.body.title,
-      body: req.body.body,
-      userId: req.user.id,
-      private: true
+      title: markdown.toHTML(req.body.title),
+      body: markdown.toHTML(req.body.body),
+      userId: req.user.id
    };
 
   wikiQueries.addPrivateWiki(newWiki, (err, wiki) => {

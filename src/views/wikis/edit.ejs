@@ -8,12 +8,12 @@
 
     <main class="container">
       <h1>Edit Wiki</h1>
-      <p><%= wiki.private %> </p>
+  
       <form action="/wikis/<%= wiki.id %>/update" method="post">
         <div class="form-group">
           <label for="title">Wiki Title</label>
           <input
-            value="<%= wiki.title %>"
+            value="<%- wiki.title %>"
             type="text"
             class="form-control"
             name="title"
@@ -29,7 +29,7 @@
             name="body"
             placeholder="Enter Body"
           >
-<%= wiki.body %></textarea
+<%- wiki.body %></textarea
           >
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
