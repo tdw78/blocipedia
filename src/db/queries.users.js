@@ -1,6 +1,7 @@
 const User = require("./models").User;
 const bcrypt = require("bcryptjs");
 const Wiki = require("./models").Wiki;
+const Collaborator = require("./models").Collaborator;
 
 module.exports = {
   
@@ -36,7 +37,12 @@ module.exports = {
         Wiki.scope({method: ["privateWikis", id]}).findAll()
         .then((wikis) => {
           result["wikis"] = wikis;
+      
+        Collaborator.scope({method: ["collaborations", id]}).findAll()
+        .then((collaborations) => {
+          result["collaborations"] = collaborations;
           callback(null, result);
+         })
         })
         .catch((err) => {
           callback(err);

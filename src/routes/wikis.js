@@ -3,6 +3,7 @@ const router = express.Router();
 const wikiController = require("../controllers/wikiController");
 const validation = require("./validation");
 const helper = require("../auth/helpers");
+const collaboratorController = require("../controllers/collaboratorController");
 
 router.get("/wikis", wikiController.index);
 router.get("/wikis/new", wikiController.new);
@@ -12,11 +13,8 @@ router.get("/wikis/:id/edit", wikiController.edit);
 router.post("/wikis/:id/update", wikiController.update);
 router.post("/wikis/:id/destroy", wikiController.destroy);
 router.get("/wikis/new/private", wikiController.newPrivate);
-
-
 router.get("/wikis/new/list", wikiController.privateWikis);
 router.post("/wikis/new/private", wikiController.createPrivate);
-
 router.get("/wikis/:id/convert", wikiController.conversionPage);
 router.post("/wikis/:id/convert", wikiController.convertWiki);
 

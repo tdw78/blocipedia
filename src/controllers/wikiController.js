@@ -1,6 +1,7 @@
-const wikiQueries = require("../db/queries.wikis.js")
+const wikiQueries = require("../db/queries.wikis.js");
 const Authorizer = require("../policies/wiki");
 const markdown = require( "markdown" ).markdown;
+const collaboratorQueries = require("../db/queries.collaborators.js");
 
 module.exports = {
 
@@ -50,6 +51,7 @@ index(req, res, next) {
   wikiQueries.getWiki(req.params.id, (err, wiki) => {
     
      if(err || wiki == null){
+       console.log(err);
       res.redirect(404, "/");
     } else {
       res.render("wikis/show", {wiki});
@@ -58,11 +60,11 @@ index(req, res, next) {
 },
 edit(req, res, next){
   
-  wikiQueries.getWiki(req.params.id, (err, wiki) => {
+  wikiQueries.getWiki(req.params.id, (err, wiki, collaborators) => {
     if(err || wiki == null){
          res.redirect(404, "/");
       } else {
-         res.render("wikis/edit", {wiki});
+         res.render("wikis/edit", {wiki, collaborators});
      } 
   });
  },

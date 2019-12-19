@@ -35,6 +35,40 @@
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
     </main>
+    <br>
+    <br>
+
+    <% if(currentUser && currentUser.role === "Premium" && wiki.private) { %>
+      <div class = "collaborators">
+        <h1>Collaborators</h1>
+
+        <ul class="list-unstyled">
+          <li>
+              <form action="/wikis/<%= wiki.id %>/collaborators/add" method="post">
+                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email of Collaborator" />
+                <button type="submit" class="btn btn-success">Add Collaborator</button>
+              </form>
+          </li>
+      </ul>
+        
+        <% if (collaborators) { %>
+          <% collaborators.forEach((collaborator) => { %>
+            <li>
+              <%= collaborator.users.name %>
+              <form 
+              style="display:initial" 
+              action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/destroy" 
+              method="post">
+                <button type="submit" class="btn btn-danger"onclick="alert('Alert: Are you sure that you want to delete this collaborator?')">Remove</button>
+              </form>
+            </li>
+          <% }) %> 
+        <% } %>
+         
+        
+      </div>
+
+    <% } %>
 
     <% include ../static/partials/baseScripts.ejs %>
   </body>

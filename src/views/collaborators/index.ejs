@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <main class="container">
+      <% include ../static/partials/navbar.ejs %>
+
+      <h1>Collaborators</h1>
+
+
+      <ul class="list-group">
+        <li>
+            <form action="/wikis/<%= wiki.id %>/collaborators/add" method="POST">
+              <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email of Collaborator">
+              <button type="submit" class="btn btn-success">Add Collaborator</button>
+            </form>
+        </li>
+
+        <% collaborators.forEach((collaborator) => { %>
+
+           <li class="list-group-item">
+             <%= collaborator.user.name %>
+             <form action="/wikis/<%= wiki.id %>/collaborators/destroy" method="POST">
+               <button type="submit" class="btn btn-danger">Delete Collaborator</button>
+             </form>
+           </li>
+        <% }) %>
+        
+      </ul>
+        
+    
+    </main>
+  </body>
+</html>

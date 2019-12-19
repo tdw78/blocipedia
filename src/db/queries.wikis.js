@@ -1,5 +1,8 @@
 const Wiki = require("./models").Wiki;
+const Collaborator = require("./models").Collaborator;
 const Authorizer = require("../policies/wiki");
+const User = require("./models").User;
+const markdown = require( "markdown" ).markdown;
 
 module.exports = {
 
@@ -27,14 +30,26 @@ module.exports = {
      });
   },
   getWiki(id, callback) {
-    
-   return Wiki.findByPk(id)
+
+   return Wiki.findByPk(id, {
+      include: [{
+        model: Collaborator,
+          as: "collaborators",
+          include: [{
+            model: User,
+            as: "users"
+        }]
+      }]
+    })
      .then((wiki) => {
-       callback(null, wiki);
-     })
-     .catch((err) => {
-       callback(err);
-     })
+      Collaborator.scope({method: ["collaborators", wiki.id]}).findAll()
+      .then((collaborators) => {
+        callback(null, wiki, collaborators);
+      })
+      .catch((err) => {
+        callback(err);
+      })
+    }); 
   },
   updateWiki(req, updatedWiki, callback){
      return Wiki.findByPk(req.params.id)
