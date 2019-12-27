@@ -8,7 +8,7 @@ create(req, res, next){
     if(err){
       req.flash("error", err);
       console.log(err);
-      res.redirect("/");
+      res.redirect(`/wikis/${req.params.id}/edit`);
     } else {
       res.redirect(req.headers.referer);
     }
